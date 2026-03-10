@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMARITAN Central Hub — Kenya</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <div class="logo">SAMARITAN</div>
+        <div class="tagline">KENYA'S CENTRAL CIVIC HUB</div>
+    </header>
+
+    <main>
+        <!-- Central Hub Dashboard -->
+        <section id="hub" class="section active">
+            <h2>SAMARITAN Central Hub <span class="live">● LIVE</span></h2>
+            <div class="hub-grid">
+                <div class="module" onclick="showLog('API Connector')"><i class="fas fa-plug"></i><span>API Connector</span><small>Ushahidi Ready</small></div>
+                <div class="module" onclick="showLog('Form Submission')"><i class="fas fa-file-upload"></i><span>Form Submission</span><small>EACC • A4T • Uwajibikaji</small></div>
+                <div class="module" onclick="showLog('Messaging')"><i class="fas fa-comments"></i><span>Messaging Connector</span><small>#FichuaKwaDCI • SMS</small></div>
+                <div class="module" onclick="showLog('Geo & Evidence')"><i class="fas fa-map-marked-alt"></i><span>Geo & Evidence</span><small>Encrypted Storage</small></div>
+            </div>
+            <img src="assets/samaritan-architecture.png" alt="Technical Architecture" class="architecture" style="width:100%;border-radius:12px;margin-top:20px;">
+        </section>
+
+        <!-- Submit Report -->
+        <section id="submit" class="section">
+            <h2>Submit Unified Report</h2>
+            <form id="report-form">
+                <textarea id="description" placeholder="Describe the issue (corruption, abandoned project...)" required></textarea>
+                <input type="file" id="media" accept="image/*,video/*">
+                <div id="location-info">Detecting your location...</div>
+                <input type="hidden" id="lat"><input type="hidden" id="lon">
+
+                <div class="platforms">
+                    <h3>Route to (select all that apply):</h3>
+                    <label><input type="checkbox" value="Ushahidi" checked> Ushahidi (API)</label>
+                    <label><input type="checkbox" value="EACC"> EACC Whistleblower</label>
+                    <label><input type="checkbox" value="A4T"> Action for Transparency (A4T)</label>
+                    <label><input type="checkbox" value="Uwajibikaji"> Uwajibikaji Pamoja</label>
+                    <label><input type="checkbox" value="Fichua"> #FichuaKwaDCI (WhatsApp/SMS)</label>
+                </div>
+
+                <label><input type="checkbox" id="anonymous"> Full Anonymity Mode (AES encrypted)</label>
+                <button type="submit" class="btn">SEND TO CENTRAL HUB</button>
+            </form>
+        </section>
+
+        <!-- My Reports -->
+        <section id="reports" class="section">
+            <h2>My Reports & Status</h2>
+            <div id="report-history"></div>
+        </section>
+
+        <!-- Map -->
+        <section id="map" class="section">
+            <h2>Civic Map (Live Pins)</h2>
+            <div id="leaflet-map" style="height:400px;border-radius:12px;"></div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <button onclick="switchTab('hub')"><i class="fas fa-home"></i> Hub</button>
+        <button onclick="switchTab('submit')"><i class="fas fa-plus"></i> Report</button>
+        <button onclick="switchTab('reports')"><i class="fas fa-list"></i> History</button>
+        <button onclick="switchTab('map')"><i class="fas fa-map"></i> Map</button>
+    </nav>
+
+    <div id="routing-log" class="modal"></div>
+
+    <script src="js/app.js"></script>
+</body>
+      </html>
